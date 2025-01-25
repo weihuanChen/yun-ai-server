@@ -1,18 +1,7 @@
 package main
 
-import (
-	"fmt"
-	"github.com/gin-gonic/gin"
-)
+import "feichai.tech/yun-ai-server/cmd"
 
 func main() {
-
-	fmt.Println("hello I am AI app")
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "hello AI app",
-		})
-	})
-	r.Run(":8089")
+	cmd.Start()
 }
