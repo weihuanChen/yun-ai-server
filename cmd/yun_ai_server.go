@@ -3,7 +3,6 @@ package cmd
 import (
 	"context"
 	"errors"
-	"feichai.tech/yun-ai-server/pkg/router"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -13,6 +12,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+	"yinglian.com/yun-ai-server/configs"
+	"yinglian.com/yun-ai-server/pkg/router"
 )
 
 func Start() {
@@ -27,7 +28,7 @@ func runApp() {
 }
 func runHttpServer(r *gin.Engine) {
 	v := &http.Server{Handler: r}
-	listener, err := net.Listen("tcp", ":8099")
+	listener, err := net.Listen("tcp", ":"+configs.Cfg.App.Port)
 	if err != nil {
 		log.Fatal(err)
 	}

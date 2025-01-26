@@ -1,0 +1,9 @@
+app:
+  version: v1.0.1
+  name: yun-ai-server
+  idle_time_out: 5
+  read_time_out: 5
+  write_time_out: 5
+  port: 8099
+  env: debug
+  desc: AI应用

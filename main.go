@@ -1,7 +1,11 @@
 package main
 
-import "feichai.tech/yun-ai-server/cmd"
+import (
+	"yinglian.com/yun-ai-server/cmd"
+	"yinglian.com/yun-ai-server/configs"
+)
 
 func main() {
+	configs.InitCfg()
 	cmd.Start()
 }
