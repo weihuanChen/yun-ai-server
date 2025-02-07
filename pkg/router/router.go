@@ -3,10 +3,12 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"time"
+	"yinglian.com/yun-ai-server/internal/middleware"
 )
 
 func AiServerRouter() *gin.Engine {
 	r := gin.Default()
+	middleware.InitMiddleware(r)
 	r.GET("/ping", func(c *gin.Context) {
 		// time.Sleep(10 * time.Second) // 模拟长时间处理的请求
 		c.JSON(200, gin.H{
