@@ -13,6 +13,7 @@ import (
 	"syscall"
 	"time"
 	"yinglian.com/yun-ai-server/configs"
+	"yinglian.com/yun-ai-server/internal/db"
 	"yinglian.com/yun-ai-server/pkg/router"
 )
 
@@ -24,6 +25,7 @@ func Start() {
 func runApp() {
 	fmt.Println("Hello , AI App")
 	r := router.AiServerRouter()
+	db.New()
 	runHttpServer(r)
 }
 func runHttpServer(r *gin.Engine) {

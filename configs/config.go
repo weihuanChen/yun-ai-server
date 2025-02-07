@@ -29,9 +29,17 @@ type logger struct {
 	LogRotationTime int    `mapstructure:"logRotationTime"`
 	LogLevel        string `mapstructure:"logLevel"`
 }
+type db struct {
+	Name string `mapstructure:"name"`
+	Host string `mapstructure:"host"`
+	Port string `mapstructure:"port"`
+	User string `mapstructure:"user"`
+	Psw  string `mapstructure:"psw"`
+}
 type AppConfig struct {
 	App    app    `mapstructure:"app"`
 	Logger logger `mapstructure:"logger"`
+	Db     db     `mapstructure:"db"`
 }
 
 // CfgPath 配置文件路径
