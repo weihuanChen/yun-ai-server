@@ -7,4 +7,6 @@ import (
 
 func InitMiddleware(r *gin.Engine) {
 	r.Use(logger.New())
+	// cors 中间件
+	r.Use(Cors())
 }
