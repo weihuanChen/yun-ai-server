@@ -26,6 +26,8 @@ func runApp() {
 	fmt.Println("Hello , AI App")
 	r := router.AiServerRouter()
 	db.New()
+	// 自动迁移模型
+	db.AutoMigrate()
 	runHttpServer(r)
 }
 func runHttpServer(r *gin.Engine) {
