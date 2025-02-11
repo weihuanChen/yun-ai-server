@@ -13,7 +13,9 @@ import (
 	"syscall"
 	"time"
 	"yinglian.com/yun-ai-server/configs"
+	"yinglian.com/yun-ai-server/internal/banner"
 	"yinglian.com/yun-ai-server/internal/db"
+	"yinglian.com/yun-ai-server/internal/redis"
 	"yinglian.com/yun-ai-server/pkg/router"
 )
 
@@ -24,10 +26,13 @@ func Start() {
 
 func runApp() {
 	fmt.Println("Hello , AI App")
-	r := router.AiServerRouter()
+
 	db.New()
 	// 自动迁移模型
 	db.AutoMigrate()
+	r := router.AiServerRouter()
+	// 初始化redis
+	redis.New()
 	runHttpServer(r)
 }
 func runHttpServer(r *gin.Engine) {
@@ -41,6 +46,7 @@ func runHttpServer(r *gin.Engine) {
 
 	go func() {
 		fmt.Println("正在努力启动中...")
+		banner.PrintBanner()
 		// 通知服务
 		close(started)
 		if err := v.Serve(listener); err != nil && !errors.Is(err, http.ErrServerClosed) {

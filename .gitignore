@@ -30,3 +30,5 @@ docker/
 
 # log
 .logs/
+# idea
+.idea/
