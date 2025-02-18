@@ -9,20 +9,20 @@ package wire
 import (
 	"github.com/google/wire"
 	"gorm.io/gorm"
-	"yinglian.com/yun-ai-server/pkg/serve/controller"
+	"yinglian.com/yun-ai-server/pkg/serve/controller/account"
 	"yinglian.com/yun-ai-server/pkg/serve/mapper"
 	"yinglian.com/yun-ai-server/pkg/serve/service"
 )
 
 // Injectors from wire.go:
 
-func InitializeAccountController(db *gorm.DB) (*controller.AccountController, error) {
+func InitializeAccountController(db *gorm.DB) (*account.AccountController, error) {
 	accountMapperImpl := mapper.NewAccountMapperImpl(db)
 	accountServiceImpl := service.NewAccountServiceImpl(accountMapperImpl)
-	accountController := controller.NewAccountController(accountServiceImpl)
+	accountController := account.NewAccountController(accountServiceImpl)
 	return accountController, nil
 }
 
 // wire.go:
 
-var AccountSet = wire.NewSet(mapper.NewAccountMapperImpl, wire.Bind(new(mapper.AccountMapper), new(*mapper.AccountMapperImpl)), service.NewAccountServiceImpl, wire.Bind(new(service.AccountService), new(*service.AccountServiceImpl)), controller.NewAccountController)
+var AccountSet = wire.NewSet(mapper.NewAccountMapperImpl, wire.Bind(new(mapper.AccountMapper), new(*mapper.AccountMapperImpl)), service.NewAccountServiceImpl, wire.Bind(new(service.AccountService), new(*service.AccountServiceImpl)), account.NewAccountController)
